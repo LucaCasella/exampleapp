@@ -9,7 +9,9 @@
 </head>
 <body>
 <div>
-    {{$name}}
+    @foreach($pictures as $picture)
+        <img src="data:image/jpeg;base64,{{$picture}}"/>
+    @endforeach
 </div>
 </body>
 </html>

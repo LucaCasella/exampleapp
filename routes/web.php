@@ -16,16 +16,11 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function (){
-    $query = DB::table('table_users')->select('picture')->get();
+    $pictures = DB::table('table_users')
+                  ->get(['picture'])
+                  ->map(function ($user){
+                      return base64_encode($user->picture);
+                  });
 
-//    $immagine = $query[0];
-//
-//    $immagine2 = $immagine['picture'];
-
-//    dd($immagine2);
-
-//    dd($query);
-
-    return view('my-templates.public', ['name' => $query]);
-
+    return view('my-templates.public', ['pictures' => $pictures]);
 });
